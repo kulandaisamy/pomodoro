@@ -1,0 +1,31 @@
+.header {
+    position: absolute;
+    left: 35%;
+    top: 10%;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    animation: mymove 4s;
+    display: flex;
+}
+
+@keyframes mymove {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.display {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+input[type="number"] {
+    box-sizing: border-box;
+    border-style: hidden;
+}
+button {
+    background-color: #007bff9c;
+}
+.todoform {
+    display: flex;
+}

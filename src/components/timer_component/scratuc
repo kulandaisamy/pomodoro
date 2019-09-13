@@ -1,0 +1,99 @@
+
+
+    
+
+    render() {
+        return (
+            <div>
+                <form autoComplete="off">
+                    <input
+                        style={{
+                            position: "absolute",
+                            left: "40%",
+                            top: "25%"
+                        }}
+                        className="form-control form-control-lg"
+                        name="hour"
+                        type="number"
+                        value={this.state.hour}
+                        placeholder="HOUR"
+                        
+                    />
+                    <input
+                        style={{
+                            position: "absolute",
+                            left: "51%",
+                            top: "25%"
+                        }}
+                        className="form-control form-control-lg"
+                        name="minute"
+                        type="number"
+                        onChange={this.handleValue}
+                        value={this.state.minute}
+                        placeholder="MINUTE"
+                        disabled={this.state.disabled}
+                    />
+                    <input
+                        style={{
+                            position: "absolute",
+                            left: "62%",
+                            top: "25%"
+                        }}
+                        className="form-control form-control-lg"
+                        name="second"
+                        type="number"
+                        onChange={this.handleValue}
+                        value={this.state.second}
+                        placeholder="SECOND"
+                        disabled={this.state.disabled}
+                    />
+
+                </form>
+            </div>
+        );
+    }
+}
+
+
+handleTimer = (hour, minute, second) => {
+        this.setState({ hour: hour });
+        this.setState({ minute: minute });
+        this.setState({ second: second });
+        this.setState({ distance: this.state.hour * 60 * 60 });
+    };
+    componentDidMount() {
+        setInterval(() => {let hour=Math.floor(this.state.distance*60)}, 1000);
+    }
+
+        handleTimer = (hour, minute, second) => {
+        let hour1 = hour;
+        let minute2 = minute;
+        let second3 = second;
+
+        console.log("form1", hour1);
+        this.setState({ hour: hour1 });
+        this.setState({ minute: minute2 });
+        this.setState({ second: second3 });
+        console.log("hour", this.state.hour);
+        this.setState({
+            distance: this.state.hour * 60 * 60
+        });
+
+        console.log("form2", minute2);
+        console.log("form3", second3);
+
+        console.log("minute", this.state.minute);
+        console.log("second", this.state.second);
+        setInterval(() => {
+            let hour = Math.floor(this.state.distance / (60 * 60));
+            let minute = Math.floor(this.state.distance / 60) % 60;
+            let second = Math.floor(this.state.distance % 60);
+            this.setState({ hour: hour });
+            this.setState({ minute: minute });
+            this.setState({ second: second });
+            this.setState({ distance: this.state.distance - 1 });
+            console.log("hour", this.state.hour);
+            console.log("minute", this.state.minute);
+            console.log("second", this.state.second);
+        }, 1000);
+    };
