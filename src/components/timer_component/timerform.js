@@ -10,7 +10,9 @@ class Timerform extends React.Component {
     };
 
     handleValue = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        if (e.target.value >= 0) {
+            this.setState({ [e.target.name]: e.target.value });
+        }
         setTimeout(() => {
             let hour = this.state.hour;
             let minute = this.state.minute;
@@ -37,6 +39,7 @@ class Timerform extends React.Component {
             alert("ENTER HOUR");
         }
     };
+
     onClick = e => {
         this.handleDisable();
         this.props.handleTimer();
@@ -103,8 +106,8 @@ class Timerform extends React.Component {
                         disabled={this.state.disabled}
                     />
                     <button
-                        id="click"
                         type="button"
+                        id="click"
                         onClick={this.onClick}
                         style={{
                             position: "absolute",
@@ -121,6 +124,7 @@ class Timerform extends React.Component {
                             left: "46%",
                             top: "35%"
                         }}
+                        id="stopbutton"
                         onClick={this.pauseTimer}
                     >
                         STOP TIME
@@ -128,6 +132,7 @@ class Timerform extends React.Component {
                     <button
                         type="reset"
                         onClick={this.reset}
+                        id="resetbutton"
                         style={{
                             position: "absolute",
                             left: "53.5%",
