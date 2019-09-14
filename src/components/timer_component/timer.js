@@ -8,15 +8,16 @@ class Timer extends React.Component {
         second: "",
         distance: ""
     };
-
-    handleTimer = (hour, minute, second) => {
+    handleState = (hour, minute, second) => {
         this.setState({
             hour,
             minute,
             second,
             distance: hour * 60 * 60 + minute * 60 + second * 1
         });
-        setInterval(() => {
+    };
+    handleTimer = () => {
+        this.id = setInterval(() => {
             var hour = Math.floor((this.state.distance / (60 * 60)) % 12);
             var minute = Math.floor((this.state.distance / 60) % 60);
             var second = Math.floor(this.state.distance % 60);
@@ -27,6 +28,9 @@ class Timer extends React.Component {
                 distance: this.state.distance - 1
             });
         }, 1000);
+    };
+    clearState = () => {
+        this.setState({ hour: "", minute: "", second: "", distance: "" });
     };
 
     render() {
@@ -43,7 +47,12 @@ class Timer extends React.Component {
                 >
                     {this.state.hour}:{this.state.minute}:{this.state.second}
                 </h1>
-                <Timerform handleTimer={this.handleTimer} />
+                <Timerform
+                    handleTimer={this.handleTimer}
+                    id={this.id}
+                    clearState={this.clearState}
+                    handleState={this.handleState}
+                />
             </div>
         );
     }

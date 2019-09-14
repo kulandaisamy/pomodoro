@@ -11,29 +11,52 @@ class Timerform extends React.Component {
 
     handleValue = e => {
         this.setState({ [e.target.name]: e.target.value });
+        setTimeout(() => {
+            let hour = this.state.hour;
+            let minute = this.state.minute;
+            let second = this.state.second;
+            this.props.handleState(hour, minute, second);
+        }, 0);
     };
 
     handleDisable = () => {
-        if (this.state.hour && this.state.minute && this.state.second) {
-            document.getElementById("timer").style.visibility = "visible";
-            this.setState({ disabled: true });
+        if (this.state.hour) {
+            if (this.state.minute) {
+                if (this.state.second) {
+                    document.getElementById("timer").style.visibility =
+                        "visible";
+                    document.getElementById("click").disabled = true;
+                    this.setState({ disabled: true });
+                } else {
+                    alert("ENTER SECOND");
+                }
+            } else {
+                alert("ENTER MINUTE");
+            }
         } else {
-            this.setState({ disabled: false });
+            alert("ENTER HOUR");
         }
     };
     onClick = e => {
-        let hour = this.state.hour;
-        let minute = this.state.minute;
-        let second = this.state.second;
-        this.props.handleTimer(hour, minute, second);
         this.handleDisable();
-        document.getElementById("click").disabled = true;
+        this.props.handleTimer();
+    };
+    pauseTimer = e => {
+        document.getElementById("click").disabled = false;
+        clearInterval(this.props.id);
+    };
+    reset = e => {
+        this.setState({ hour: "", minute: "", second: "", disabled: false });
+        document.getElementById("click").disabled = false;
+        document.getElementById("timer").style.visibility = "hidden";
+        this.props.clearState();
+        clearInterval(this.props.id);
     };
 
     render() {
         return (
-            <div style={{ display: "flex" }}>
-                <form>
+            <div>
+                <form style={{ display: "flex" }}>
                     <input
                         style={{
                             position: "absolute",
@@ -98,13 +121,13 @@ class Timerform extends React.Component {
                             left: "46%",
                             top: "35%"
                         }}
-                        onClick={this.handleStoptimer}
+                        onClick={this.pauseTimer}
                     >
                         STOP TIME
                     </button>
                     <button
                         type="reset"
-                        onClick={this.handleDisable}
+                        onClick={this.reset}
                         style={{
                             position: "absolute",
                             left: "53.5%",

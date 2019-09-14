@@ -17,8 +17,9 @@ class Header extends React.Component {
         return (
             <span>
                 <h2 className="header">
-                    <span style={{ color: "orange" }}>WELCOME</span> TO{" "}
-                    <span style={{ color: "green" }}>POMODORO</span> APP
+                    <span style={{ color: "orange" }}>WELCOME&nbsp;</span> TO
+                    <span style={{ color: "green" }}>&nbsp;POMODORO</span>
+                    &nbsp;APP
                 </h2>
                 <div
                     className="display"
